@@ -27,14 +27,14 @@ While this pipeline is not clinical software, following safety principles:
 - No "best effort" processing of questionable data
 
 **Example**:
-```python
+\`\`\`python
 # GOOD: Fail fast with explicit error
 if np.any(np.isnan(data)):
     raise DataQualityError("Data contains NaN values")
 
 # BAD: Silently continue with corrupted data
 data = np.nan_to_num(data)  # ❌ Hides data quality issues
-```
+\`\`\`
 
 ### 2. Input Validation
 
@@ -60,7 +60,7 @@ data = np.nan_to_num(data)  # ❌ Hides data quality issues
 **Principle**: Every error should be immediately understandable.
 
 **Implementation**:
-```python
+\`\`\`python
 # GOOD: Explicit, actionable error
 raise DimensionalityError(
     f"Expected 3D data, got {data.ndim}D array with shape {data.shape}"
@@ -68,7 +68,7 @@ raise DimensionalityError(
 
 # BAD: Vague error
 raise Exception("Invalid data")  # ❌ No context
-```
+\`\`\`
 
 ### 4. Traceability
 
@@ -81,7 +81,7 @@ raise Exception("Invalid data")  # ❌ No context
 - **Version tracking**: Environment information (library versions, platform)
 
 **Log Example**:
-```json
+\`\`\`json
 {
   "timestamp": "2024-01-15T10:30:45.123Z",
   "level": "INFO",
@@ -90,7 +90,7 @@ raise Exception("Invalid data")  # ❌ No context
   "filepath": "/data/scan_001.nii.gz",
   "checksum": "a3f5b8c..."
 }
-```
+\`\`\`
 
 ### 5. Determinism
 

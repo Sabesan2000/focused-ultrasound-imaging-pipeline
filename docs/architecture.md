@@ -14,7 +14,7 @@ This pipeline is structured as a **layered, modular architecture** following pri
 
 ## Layer Architecture
 
-```
+\`\`\`
 ┌─────────────────────────────────────┐
 │         Main Entry Point            │
 │         (Orchestration)             │
@@ -26,7 +26,7 @@ This pipeline is structured as a **layered, modular architecture** following pri
 │  Pipeline   │ │   Utils    │
 │  Modules    │ │  Modules   │
 └─────────────┘ └────────────┘
-```
+\`\`\`
 
 ### Layer 1: Pipeline Modules
 
@@ -105,7 +105,7 @@ This pipeline is structured as a **layered, modular architecture** following pri
 
 ## Data Flow
 
-```
+\`\`\`
 Input NIfTI File
       │
       ▼
@@ -135,13 +135,13 @@ Input NIfTI File
        │
        ▼
 Output Files (JSON, PNG, TXT, LOG)
-```
+\`\`\`
 
 ## Error Handling Strategy
 
 ### Exception Hierarchy
 
-```
+\`\`\`
 Exception
   └── PipelineError (base for all pipeline errors)
        ├── ImageLoadError
@@ -151,7 +151,7 @@ Exception
        │    └── MetadataError
        ├── ProcessingError
        └── ConfigurationError
-```
+\`\`\`
 
 ### Error Handling Pattern
 

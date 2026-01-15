@@ -38,9 +38,9 @@ This pipeline includes both:
 - ✅ Checksum can be computed
 
 **Failure Mode**:
-```python
+\`\`\`python
 raise ImageLoadError("File does not exist: /path/to/file.nii")
-```
+\`\`\`
 
 ### Layer 2: Format Validation
 
@@ -55,9 +55,9 @@ raise ImageLoadError("File does not exist: /path/to/file.nii")
 - ✅ Affine matrix is present
 
 **Failure Mode**:
-```python
+\`\`\`python
 raise ImageLoadError("Failed to load NIfTI file: <underlying error>")
-```
+\`\`\`
 
 ### Layer 3: Dimensionality Validation
 
@@ -72,11 +72,11 @@ raise ImageLoadError("Failed to load NIfTI file: <underlying error>")
 - ✅ Voxel spacing is 3D
 
 **Failure Mode**:
-```python
+\`\`\`python
 raise DimensionalityError(
     "Expected 3D volumetric data, got 4D array with shape (64, 64, 64, 20)"
 )
-```
+\`\`\`
 
 ### Layer 4: Metadata Validation
 
@@ -91,14 +91,14 @@ raise DimensionalityError(
 - ✅ Orientation information is consistent
 
 **Failure Mode**:
-```python
+\`\`\`python
 raise MetadataError("Invalid voxel spacing: -1.5 mm")
-```
+\`\`\`
 
 **Warning** (non-blocking):
-```
+\`\`\`
 Unusual voxel spacing: 15.0 mm (expected 0.1-10mm)
-```
+\`\`\`
 
 ### Layer 5: Data Quality Validation
 
@@ -113,9 +113,9 @@ Unusual voxel spacing: 15.0 mm (expected 0.1-10mm)
 - ✅ Value range is reasonable (optional)
 
 **Failure Mode**:
-```python
+\`\`\`python
 raise DataQualityError("Data contains 42 NaN values")
-```
+\`\`\`
 
 ### Layer 6: Configuration Validation
 
@@ -131,10 +131,10 @@ raise DataQualityError("Data contains 42 NaN values")
 - ✅ Directories can be created (for output)
 
 **Failure Mode**:
-```python
+\`\`\`python
 pydantic.ValidationError: 
   intensity_threshold_percentile must be between 0 and 100, got 150
-```
+\`\`\`
 
 ### Layer 7: Processing Validation
 
@@ -149,17 +149,17 @@ pydantic.ValidationError:
 - ✅ Target region has valid properties
 
 **Failure Mode**:
-```python
+\`\`\`python
 raise ProcessingError(
     "No connected components above minimum volume (100.0 mm³)"
 )
-```
+\`\`\`
 
 ## Validation Report
 
 The `ValidationReport` class provides structured validation results:
 
-```python
+\`\`\`python
 report = validate_image_data(image_data)
 
 # Check if valid
@@ -172,10 +172,10 @@ else:
 
 # Print summary
 print(report.get_summary())
-```
+\`\`\`
 
 **Example Output**:
-```
+\`\`\`
 Validation Summary:
   Checks passed: 12
   Warnings: 1
@@ -183,7 +183,7 @@ Validation Summary:
 
 Warnings:
   - Unusual voxel spacing in dimension 2: 0.05 mm (expected 0.1-10.0 mm)
-```
+\`\`\`
 
 ## Unit Test Validation
 
@@ -204,7 +204,7 @@ Each module must have tests covering:
 
 ### Example Test Structure
 
-```python
+\`\`\`python
 def test_validate_rejects_nan():
     """Test validation rejects images with NaN values."""
     # Setup: Create data with known defect
@@ -217,7 +217,7 @@ def test_validate_rejects_nan():
     # Assert: Verify expected failure
     assert not report.is_valid()
     assert any('NaN' in error for error in report.errors)
-```
+\`\`\`
 
 ## Validation vs. Performance
 
@@ -256,7 +256,7 @@ When validation fails:
 
 ### Example Error Flow
 
-```
+\`\`\`
 User provides file: corrupted_scan.nii.gz
     ↓
 Layer 1: File exists ✅
@@ -272,7 +272,7 @@ Catch in main.py
 Log error + context
     ↓
 Exit with code 1
-```
+\`\`\`
 
 ## Test Coverage Goals
 
@@ -290,13 +290,13 @@ Exit with code 1
 
 ### Running Coverage
 
-```bash
+\`\`\`bash
 # Generate coverage report
 pytest --cov=src --cov-report=html
 
 # View report
 open htmlcov/index.html
-```
+\`\`\`
 
 ## Validation Checklist
 

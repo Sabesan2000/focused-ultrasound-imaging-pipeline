@@ -1,0 +1,36 @@
+# Example configuration for focused ultrasound imaging pipeline
+# Copy this file and modify for your specific use case
+
+# Input/Output paths
+input_path: "data/example_brain_mri.nii.gz"
+output_directory: "output/"
+
+# Logging configuration
+log_level: "INFO"  # Options: DEBUG, INFO, WARNING, ERROR
+
+# Processing configuration
+processing:
+  # Random seed for reproducibility
+  random_seed: 42
+  
+  # Intensity threshold as percentile (0-100)
+  # Target voxels are identified as those above this percentile
+  intensity_percentile_threshold: 95.0
+  
+  # Gaussian smoothing sigma (voxels)
+  # Set to 0 to disable smoothing
+  smoothing_sigma: 1.0
+
+# Visualization configuration
+visualization:
+  # Whether to generate slice views
+  generate_slice_views: true
+  
+  # Which slices to visualize (options: "mid" or "max_intensity")
+  slice_selection: "mid"
+  
+  # DPI for output image
+  dpi: 150
+  
+  # Colormap for visualization
+  colormap: "gray"
